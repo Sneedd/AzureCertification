@@ -15,19 +15,20 @@ namespace Example
             // --------------------------------------------------------------------------------------------
             // Um Dataflow Bibliothek nutzen zu können muss sie über NuGet erst einmal hinzugefügt werden
             //  
-            Console.WriteLine(new string('-', 40));
-            Console.WriteLine("Dataflow");
-            Console.WriteLine();
 
             // --------------------------------------------------------------------------------------------
             // BufferBlock kann als asynchroner Puffer für Nachrichten genutzt werden
+            Console.Write("[Tpl.Dataflow.BufferBlock] BufferBlock returns = ");
             var bufferBlock = new BufferBlock<int>();
             Parallel.Invoke(
                 () => Parallel.For(0, 20, new ParallelOptions { MaxDegreeOfParallelism = 2 }, a => bufferBlock.Post(a)),
                 () => Parallel.For(0, 20, _ => Console.Write("{0}, ", bufferBlock.Receive()))
             );
             Console.WriteLine();
-            Console.WriteLine();
+
+
+
+
         }
 
         internal void RunParallelExamples()
@@ -37,16 +38,12 @@ namespace Example
             // --------------------------------------------------------------------------------------------
             // Mit der Klasse Parallel können relativ einfach parallele Aufgaben erzeugt und abgearbeitet werden
             // 
-            Console.WriteLine(new string('-', 40));
-            Console.WriteLine("ParallelFor");
-            Console.WriteLine();
-
 
             // --------------------------------------------------------------------------------------------
             // Gibt 0 bis 9 in beliebiger Reihenfolge aus, da jeder Thread 
             //   zu einem anderen Zeitpunkt ausgeführt werden könnte.
+            Console.Write("[Parallel.For] Results = ");
             Parallel.For(0, 10, a => Console.Write("{0}, ", a));
-            Console.WriteLine();
             Console.WriteLine();
 
 
@@ -57,63 +54,87 @@ namespace Example
 
 
             // --------------------------------------------------------------------------------------------
-            // Sucht in dem Bibel Text nach der Anzahl der aufgeführten Wörter
+            // Parallel.ForEach
+            //   With Parallel.ForEach() an IEnumerable can be used to create tasks easily.
             watch.Restart();
             string bible = StringData.GetBible();
+            Console.Write("[Parallel.ForEach.Simple] Results = ");
             List<string> searchWords = new List<string> {
-                "Himmel", "Hölle", "Gott", "Gold", "Teufel", "Mann", "Weib"
+                "Gott", "Mann", "Weib"
             };
-            Parallel.ForEach(searchWords, a => Console.WriteLine("{0} Count = {1}", a, bible
+            Parallel.ForEach(searchWords, a => Console.Write("{0}({1}) ", a, bible
                 .Split(new char[] { ' ', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries)
                 .Count(b => string.Compare(a, b, true) == 0)));
-            Console.WriteLine("Elapsed time = {0:0.000}s", watch.Elapsed.TotalSeconds);
-            Console.WriteLine();
-            Console.WriteLine();
+            Console.WriteLine("in {0:0.000}s", watch.Elapsed.TotalSeconds);
 
             // --------------------------------------------------------------------------------------------
-            // Sucht in dem Bibel Text nach der Anzahl der aufgeführten Wörter mit maximal 2 Threads
+            // Parallel.ForEach Options
+            //   Additionally one can use the ParallelOptions to setup some stuff, here the max amount of Tasks used.
+            //   Others are using a different TaskFactory oder including a CancelationToken.
             watch.Restart();
+            Console.Write("[Parallel.ForEach.Complex] Results = ");
             Parallel.ForEach(
                 searchWords,
-                new ParallelOptions { MaxDegreeOfParallelism = 2, },
+                new ParallelOptions { MaxDegreeOfParallelism = 2, }, // Default for MaxDegreeOfParallelism is -1
                 (w, s) =>
                 {
                     int count = bible
                         .Split(new char[] { ' ', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries)
                         .Count(b => string.Compare(w, b, true) == 0);
-                    Console.WriteLine("{0} Count = {1}", w, count);
+                    Console.Write("{0}({1}) ", w, count);
                 });
-            Console.WriteLine("Elapsed time = {0:0.000}s", watch.Elapsed.TotalSeconds);
-            Console.WriteLine();
-            Console.WriteLine();
+            Console.WriteLine("in {0:0.000}s", watch.Elapsed.TotalSeconds);
 
 
             // --------------------------------------------------------------------------------------------
-            // Sucht in dem Bibel Text nach der Anzahl der aufgeführten Wörter mit maximal 2 Threads
+            // Parallel.ForEach Break
+            //   With Break the Parallel exceution can be stopped. If break was called the next task will not be started.
             watch.Restart();
+            searchWords = new List<string> {
+                "Gott", "Mann", "Weib", "Mensch", "Teufel", // "Hass", "Gnade", "Scheiße", "Brot", "Wein", "Arsch", "Hund", "Tot"
+            };
+            Console.Write("[Parallel.ForEach.Break] Break results ");
             ParallelLoopResult result = Parallel.ForEach(
-                searchWords,
+            searchWords,
                 new ParallelOptions { MaxDegreeOfParallelism = 2, },
                 (w, s) =>
                 {
                     int count = bible
                         .Split(new char[] { ' ', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries)
                         .Count(b => string.Compare(w, b, true) == 0);
-                    if (count < 200)
+                    if (count < 20)
                     {
                         s.Break();
                     }
-                    Console.WriteLine("{0} Count = {1}", w, count);
                 });
-            Console.WriteLine("LowestBreakIteration = {0}, Completed = {1}", result.LowestBreakIteration, result.IsCompleted);
-            Console.WriteLine("Elapsed time = {0:0.000}s", watch.Elapsed.TotalSeconds);
-            Console.WriteLine();
-            Console.WriteLine();
-
+            Console.Write("in {0:0.000}s ", watch.Elapsed.TotalSeconds);
+            Console.WriteLine("while LowestBreakIteration = {0}, Completed = {1}", result.LowestBreakIteration, result.IsCompleted);
         }
 
         internal void RunPLINQExamples()
         {
+            // TODO
+
+            // --------------------------------------------------------------------------------------------
+            // Speed Comparison LINQ vs PLINQ
+            string bible = StringData.GetBible();
+            List<string> searchWords = new List<string> {
+                "Gott", "Mann", "Weib", "Mensch", "Teufel", "Hass", "Gnade", "und", "Brot", "Wein", "oder", "Hund", "Apfel"
+            };
+            DateTime current = DateTime.UtcNow;
+            var results = searchWords.Select(w => new
+            {
+                Word = w,
+                Count = bible.Split(new char[] { ' ', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries).Count(a => a == w)
+            }).ToArray();
+            Console.Write("[LINQvsPLINQ] LINQ needs {0:0.000}s while ", (DateTime.UtcNow-current).TotalSeconds);
+            current = DateTime.UtcNow;
+            results = searchWords.AsParallel().Select(w => new
+            {
+                Word = w,
+                Count = bible.Split(new char[] { ' ', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries).Count(a => a == w)
+            }).ToArray();
+            Console.WriteLine("PLINQ needs {0:0.000}s", (DateTime.UtcNow - current).TotalSeconds);
         }
 
         internal void RunTaskExamples()
