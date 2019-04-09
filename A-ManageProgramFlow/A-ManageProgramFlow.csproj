@@ -46,11 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExceptionHandling.cs" />
-    <Compile Include="Locking.cs" />
-    <Compile Include="Multithreading.cs" />
+    <Compile Include="Examples4-ExceptionHandling.cs" />
+    <Compile Include="Examples2-Locking.cs" />
+    <Compile Include="Examples1-Multithreading.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="ProgramFlow.cs" />
+    <Compile Include="Examples3-ProgramFlow.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

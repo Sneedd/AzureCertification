@@ -61,12 +61,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConsumeData.cs" />
-    <Compile Include="Example3-LinqExamples.cs" />
-    <Compile Include="IOEx.cs" />
+    <Compile Include="Examples2-ConsumeData.cs" />
+    <Compile Include="Examples3-LinqExamples.cs" />
+    <Compile Include="Examples1-IOExamples.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SerializationEx.cs" />
+    <Compile Include="Examples4-SerializationExamples.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
