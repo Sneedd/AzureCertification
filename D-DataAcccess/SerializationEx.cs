@@ -160,7 +160,7 @@ namespace Example
 
                 // -----------------------------------------
                 // Convert the binary encoded XML String into a string variable
-                string jsonText = Encoding.UTF8.GetString(stream.ToArray());
+                string xmlText = Encoding.UTF8.GetString(stream.ToArray());
 
                 // -----------------------------------------
                 // Using the XmlSerializer to create the object from XML
@@ -171,7 +171,7 @@ namespace Example
                 // -----------------------------------------
                 // Check if given XML is valid 
                 xmlSerializer = new XmlSerializer(typeof(PizzaService));
-                using (XmlReader reader = new XmlTextReader(new StringReader(jsonText)))
+                using (XmlReader reader = new XmlTextReader(new StringReader(xmlText)))
                 {
                     bool check = xmlSerializer.CanDeserialize(reader);
                     Console.WriteLine("[XmlSerialization] Given XML is valid = {0}", check);

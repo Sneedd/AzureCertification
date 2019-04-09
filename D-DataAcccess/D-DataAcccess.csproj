@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConsumeData.cs" />
+    <Compile Include="Example3-LinqExamples.cs" />
     <Compile Include="IOEx.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -72,6 +73,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\B-Types\B-Types.csproj">
+      <Project>{09d2e645-9004-44c3-8aae-523a20f44315}</Project>
+      <Name>B-Types</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Z-Data\Z-Data.csproj">
       <Project>{170fb890-2fd8-40e0-9f8a-f36988af7c2e}</Project>
       <Name>Z-Data</Name>

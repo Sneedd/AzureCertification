@@ -38,27 +38,102 @@ namespace Example
                             new Ingredient { Name = "Mushrooms" },
                             new Ingredient { Name = "Cheese" }
                         }
-                    },                },
+                    },
+                    new Pizza {
+                        Name = "Kebab",
+                        Price = 6.5f,
+                        Ingredients = new Ingredient[] {
+                            new Ingredient { Name = "Dough" },
+                            new Ingredient { Name = "Tomato Sauce" },
+                            new Ingredient { Name = "Kebab" },
+                            new Ingredient { Name = "Cheese" },
+                            new Ingredient { Name = "Kebab Sauce" },
+                        }
+                    },
+                    new Pizza {
+                        Name = "Broccoli",
+                        Price = 6.0f,
+                        Ingredients = new Ingredient[] {
+                            new Ingredient { Name = "Dough" },
+                            new Ingredient { Name = "Tomato Sauce" },
+                            new Ingredient { Name = "Broccoli" },
+                            new Ingredient { Name = "Cheese" },
+                        }
+                    },
+                    new Pizza {
+                        Name = "Meatball",
+                        Price = 6.5f,
+                        Ingredients = new Ingredient[] {
+                            new Ingredient { Name = "Dough" },
+                            new Ingredient { Name = "Tomato Sauce" },
+                            new Ingredient { Name = "Meatball" },
+                            new Ingredient { Name = "Cheese" },
+                        }
+                    },
+                    new Pizza {
+                        Name = "Pepperoni",
+                        Price = 6.5f,
+                        Ingredients = new Ingredient[] {
+                            new Ingredient { Name = "Dough" },
+                            new Ingredient { Name = "Tomato Sauce" },
+                            new Ingredient { Name = "Pepperoni" },
+                            new Ingredient { Name = "Salami" },
+                            new Ingredient { Name = "Cheese" },
+                        }
+                    },
+                },
                 Customers = new Customer[]
                 {
                     new Customer
                     {
                         Name = "Barney",
                         Address = "Bedrock",
-                        PizzaCount = 5,
+                        Favorite = "Broccoli",
+                        FavoriteCount = 58,
                     },
                     new Customer
                     {
                         Name = "Homer",
                         Address = "Springfield",
-                        PizzaCount = 367,
+                        Favorite = "Meatball",
+                        FavoriteCount = 367,
                     },
                     new Customer
                     {
                         Name = "Luke",
                         Address = "Tatooine",
-                        PizzaCount = 2,
+                        Favorite = "Margherita",
+                        FavoriteCount = 2,
+                    },
+                    new Customer
+                    {
+                        Name = "Sabrina",
+                        Address = "Greendale",
+                        Favorite = "Pepperoni",
+                        FavoriteCount = 666,
+                    },
+                    new Customer
+                    {
+                        Name = "Papa",
+                        Address = "Smurf Village",
+                        Favorite = "Classic",
+                        FavoriteCount = 7,
+                    },
+                    new Customer
+                    {
+                        Name = "Papa",
+                        Address = "Smurf Village",
+                        Favorite = "Classic",
+                        FavoriteCount = 7,
+                    },
+                    new Customer
+                    {
+                        Name = "Unknown",
+                        Address = null,
+                        Favorite = "Margherita",
+                        FavoriteCount = 0,
                     }
+
                 }
             });
         }
@@ -71,7 +146,9 @@ namespace Example
 
         public string Address { get; set; }
 
-        public int PizzaCount { get; set; }
+        public string Favorite { get; set; }
+
+        public int FavoriteCount { get; set; }
     }
 
     [Serializable]

@@ -15,6 +15,11 @@ namespace Example
         public void RunAdoNetExamples()
         {
             // --------------------------------------------------------------------------------------------
+            // - ADO.NET https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/
+            //
+            // - SqlConnection class https://docs.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqlconnection
+            //
+
             // Creating the abstract base classes
             string path = Path.Combine(Environment.CurrentDirectory, "database.mdf");
             DbConnection connection = new System.Data.SqlClient.SqlConnection(
@@ -27,7 +32,7 @@ namespace Example
             using (DbCommand createCommand = factory.CreateCommand())
             {
                 createCommand.Connection = connection;
-                createCommand.CommandText = "CREATE TABLE [Bible] ([Id] INT NOT NULL PRIMARY KEY, [Word] NVARCHAR(50) NOT NULL, [Count] INT NOT NULL)";
+                createCommand.CommandText = "CREATE TABLE [Words] ([Id] INT NOT NULL PRIMARY KEY, [Word] NVARCHAR(50) NOT NULL, [Count] INT NOT NULL)";
                 createCommand.ExecuteNonQuery();
             }
 
@@ -37,7 +42,7 @@ namespace Example
             {
                 DateTime current = DateTime.UtcNow;
                 insertCommand.Connection = connection;
-                insertCommand.CommandText = "INSERT INTO [Bible] ([Id], [Word], [Count]) VALUES (@id, @word, @count)";
+                insertCommand.CommandText = "INSERT INTO [Words] ([Id], [Word], [Count]) VALUES (@id, @word, @count)";
 
                 DbParameter idParameter = factory.CreateParameter();
                 idParameter.DbType = System.Data.DbType.Int32;
@@ -63,8 +68,8 @@ namespace Example
                 insertCommand.Prepare();
 
                 int id = 0;
-                string bible = StringData.GetBible();
-                string[] words = bible.Split(new char[] { ' ', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+                string text = StringData.CreateMediumString();
+                string[] words = text.Split(new char[] { ' ', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
                 foreach (string word in words.Distinct())
                 {
                     idParameter.Value = id++;
@@ -82,7 +87,7 @@ namespace Example
             {
                 DateTime current = DateTime.UtcNow;
                 countCommand.Connection = connection;
-                countCommand.CommandText = "SELECT COUNT(*) FROM [Bible]";
+                countCommand.CommandText = "SELECT COUNT(*) FROM [Words]";
                 int count = (int)countCommand.ExecuteScalar();
                 Console.WriteLine("[DbCommand.ExecuteScalar] Result Count = {0} in {1:0.000}s", count, (DateTime.UtcNow - current).TotalSeconds);
             }

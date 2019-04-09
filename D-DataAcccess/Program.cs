@@ -32,10 +32,13 @@ namespace Example
             (new ConsumeData()).RunConsumeJsonXmlDataExamples();
 
             // Query and manipulate data and objects by using LINQ
-            // - Query data by using operators, including projection, join, group, take, skip, aggregate; 
+            // Select data by using anonymous types
+            (new LinqExamples()).RunLinqSelectExamples();
+            // Using query comprehension syntax
+            (new LinqExamples()).RunLinqClauseExamples();
             // - create methodbased LINQ queries; 
+            // - Query data by using operators, including projection, join, group, take, skip, aggregate
             // - query data by using query comprehension syntax; 
-            // - select data by using anonymous types; 
             // - force execution of a query; 
             // - read, filter, create, and modify data structures by using LINQ to XML
 

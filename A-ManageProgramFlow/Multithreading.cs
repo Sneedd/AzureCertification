@@ -57,12 +57,12 @@ namespace Example
             // Parallel.ForEach
             //   With Parallel.ForEach() an IEnumerable can be used to create tasks easily.
             watch.Restart();
-            string bible = StringData.GetBible();
+            string text = StringData.CreateLongString();
             Console.Write("[Parallel.ForEach.Simple] Results = ");
             List<string> searchWords = new List<string> {
                 "Gott", "Mann", "Weib"
             };
-            Parallel.ForEach(searchWords, a => Console.Write("{0}({1}) ", a, bible
+            Parallel.ForEach(searchWords, a => Console.Write("{0}({1}) ", a, text
                 .Split(new char[] { ' ', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries)
                 .Count(b => string.Compare(a, b, true) == 0)));
             Console.WriteLine("in {0:0.000}s", watch.Elapsed.TotalSeconds);
@@ -78,7 +78,7 @@ namespace Example
                 new ParallelOptions { MaxDegreeOfParallelism = 2, }, // Default for MaxDegreeOfParallelism is -1
                 (w, s) =>
                 {
-                    int count = bible
+                    int count = text
                         .Split(new char[] { ' ', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries)
                         .Count(b => string.Compare(w, b, true) == 0);
                     Console.Write("{0}({1}) ", w, count);
@@ -91,7 +91,7 @@ namespace Example
             //   With Break the Parallel exceution can be stopped. If break was called the next task will not be started.
             watch.Restart();
             searchWords = new List<string> {
-                "Gott", "Mann", "Weib", "Mensch", "Teufel", // "Hass", "Gnade", "Scheiße", "Brot", "Wein", "Arsch", "Hund", "Tot"
+                "Gott", "Mann", "Weib", "Mensch", "Teufel", // "Hass", "Gnade", "Brot", "Wein", "Hund", "Tot"
             };
             Console.Write("[Parallel.ForEach.Break] Break results ");
             ParallelLoopResult result = Parallel.ForEach(
@@ -99,7 +99,7 @@ namespace Example
                 new ParallelOptions { MaxDegreeOfParallelism = 2, },
                 (w, s) =>
                 {
-                    int count = bible
+                    int count = text
                         .Split(new char[] { ' ', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries)
                         .Count(b => string.Compare(w, b, true) == 0);
                     if (count < 20)
@@ -117,7 +117,7 @@ namespace Example
 
             // --------------------------------------------------------------------------------------------
             // Speed Comparison LINQ vs PLINQ
-            string bible = StringData.GetBible();
+            string text = StringData.CreateLongString();
             List<string> searchWords = new List<string> {
                 "Gott", "Mann", "Weib", "Mensch", "Teufel", "Hass", "Gnade", "und", "Brot", "Wein", "oder", "Hund", "Apfel"
             };
@@ -125,14 +125,14 @@ namespace Example
             var results = searchWords.Select(w => new
             {
                 Word = w,
-                Count = bible.Split(new char[] { ' ', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries).Count(a => a == w)
+                Count = text.Split(new char[] { ' ', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries).Count(a => a == w)
             }).ToArray();
             Console.Write("[LINQvsPLINQ] LINQ needs {0:0.000}s while ", (DateTime.UtcNow-current).TotalSeconds);
             current = DateTime.UtcNow;
             results = searchWords.AsParallel().Select(w => new
             {
                 Word = w,
-                Count = bible.Split(new char[] { ' ', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries).Count(a => a == w)
+                Count = text.Split(new char[] { ' ', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries).Count(a => a == w)
             }).ToArray();
             Console.WriteLine("PLINQ needs {0:0.000}s", (DateTime.UtcNow - current).TotalSeconds);
         }
@@ -147,6 +147,22 @@ namespace Example
 
         internal void RunUnblockUIExamples()
         {
+        }
+
+        internal void RunWaitExamples()
+        {
+            // --------------------------------------------------------------------------------------------
+            // - Thread.Sleep method https://docs.microsoft.com/en-us/dotnet/api/system.threading.thread.sleep
+            //   Waits the given time and gives up the remainder of its time slice.
+            //   Note, that the waiting execution can immediately continue, when there are no other threads.
+            // 
+            // - Thread.Yield method https://docs.microsoft.com/en-us/dotnet/api/system.threading.thread.yield
+            //   Gives up the remainder of the current threads time splice.
+            //   Note, that the execution can immediately continue, when there are no other threads.
+            //
+            // - Thread.SpinWait method https://docs.microsoft.com/en-us/dotnet/api/system.threading.thread.spinwait
+            //   ????
+            // 
         }
 
         internal void RunKeywordsAsyncAwaitExamples()

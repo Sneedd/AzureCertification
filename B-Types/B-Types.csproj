@@ -44,11 +44,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Examples4-ImplementingInterfaces.cs" />
+    <Compile Include="Examples3-EnforceEncapsulation.cs" />
+    <Compile Include="Examples1-CreateTypes.cs" />
+    <Compile Include="Examples2-ConsumeTypes.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Z-Data\Z-Data.csproj">
+      <Project>{170fb890-2fd8-40e0-9f8a-f36988af7c2e}</Project>
+      <Name>Z-Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
