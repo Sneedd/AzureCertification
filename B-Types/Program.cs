@@ -21,14 +21,19 @@ namespace Example
             // Create types
             // TODO
 
-            // ---------------------------------------------------------------------
-            // Consume types
-            // - Boxing, unboxing and var Keyword
-            (new ConsumeTypes()).RunConversionExamples();
-            // - Dynamic
-            (new ConsumeTypes()).RunDynamicExamples();
-            (new ConsumeTypes()).RunExpandoExamples();
-            (new ConsumeTypes()).RunDynamicObjectExamples();
+            //// ---------------------------------------------------------------------
+            //// Consume types
+            //// - Boxing, unboxing and var Keyword
+            //(new ConsumeTypes()).RunConversionExamples();
+            //// - Dynamic
+            //(new ConsumeTypes()).RunDynamicExamples();
+            //(new ConsumeTypes()).RunExpandoExamples();
+            //(new ConsumeTypes()).RunDynamicObjectExamples();
+
+
+            //(new ImplementingInterfaces()).RunIDisposableExamples();
+            (new ImplementingInterfaces()).RunCustomFormatterExamples();
+            
 
             Console.WriteLine("Press any key ...");
             Console.ReadKey();

@@ -2,6 +2,7 @@
 using System.Data.Common;
 using System.Linq;
 using System.IO;
+using System.Transactions;
 
 namespace Example
 {
@@ -93,6 +94,83 @@ namespace Example
             }
 
 
+        }
+
+        #endregion
+
+        #region Transaction Examples
+
+        public void RunTransactionsExamples()
+        {
+            // - IEnlistmentNotification interface https://docs.microsoft.com/en-us/dotnet/api/system.transactions.ienlistmentnotification
+                       
+
+            // Thread.GetMutableExecutionContext() allows the communication between TransactionScope and the inner Transactions.
+            // IEnlistmentNotification can be used to implement integrate TransactionScope/Transcations in your an own API.
+
+            // -----------------------------------------
+            Console.Write("[Transaction] ");
+            using (TransactionScope scope = new TransactionScope())
+            {
+                Transaction.Current.EnlistVolatile(new TestEnlistmentClass(), EnlistmentOptions.None);
+                scope.Complete();
+            }
+            Console.WriteLine();
+
+
+            // -----------------------------------------
+            Console.Write("[Transaction.Exception] ");
+            try
+            {
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    Transaction.Current.EnlistVolatile(new TestEnlistmentClass(), EnlistmentOptions.None);
+                    throw (new Exception());
+                    scope.Complete();
+                }
+            }
+            catch (Exception)
+            {
+                Console.Write("Exception ");
+            }
+            Console.WriteLine();
+
+            // -----------------------------------------
+            Console.Write("[Transaction.WithoutComplete] ");
+            using (TransactionScope scope = new TransactionScope())
+            {
+                Transaction.Current.EnlistVolatile(new TestEnlistmentClass(), EnlistmentOptions.None);
+                //scope.Complete();
+            }
+            Console.WriteLine();
+
+        }
+
+        public class TestEnlistmentClass : IEnlistmentNotification
+        {
+            public void Prepare(PreparingEnlistment enlistment)
+            {
+                Console.Write("Prepare ");
+                enlistment.Prepared();
+            }
+
+            public void Commit(Enlistment enlistment)
+            {
+                Console.Write("Commit ");
+                enlistment.Done();
+            }
+
+            public void Rollback(Enlistment enlistment)
+            {
+                Console.Write("Rollback ");
+                enlistment.Done();
+            }
+
+            public void InDoubt(Enlistment enlistment)
+            {
+                Console.Write("InDoubt ");
+                enlistment.Done();
+            }
         }
 
         #endregion

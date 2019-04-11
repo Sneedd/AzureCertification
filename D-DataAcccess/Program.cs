@@ -26,6 +26,7 @@ namespace Example
             // Consume data
             // - Using ADO.NET
             (new ConsumeData()).RunAdoNetExamples();
+            (new ConsumeData()).RunTransactionsExamples();
             // - Retrieve data by WebServices
             (new ConsumeData()).RunUsingWebServicesExamples();
             // - Consume JSON and XML data from WebService
