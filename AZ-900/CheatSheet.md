@@ -1,11 +1,26 @@
 # CheatSheet
 
+## Glossary
+
+* Predictability (`Vorhersehbarkeit`): Performance and costs are predictable
+* Governance (`Kontrolle, Beherschung`): ??
+* Availability (`Verfügbarkeit`): Uptime
+  * General availability
+* Scalability: Handle demand
+  * Vertical: Hardware
+  * Horizontal: Machines
+* Reliability: Failure recovery
+* Durability: Disaster recovery
+* ??
+
+
 ## Azure VM
 
 * Scale Sets = Demand-depended scaling of VMs \
   <https://learn.microsoft.com/en-US/azure/virtual-machine-scale-sets/overview>
 
-
+* Availability sets = Grouping of VMs for redundancy and availability \ 
+  <https://learn.microsoft.com/en-us/azure/virtual-machines/availability-set-overview>
 
 ## Azure Virtual Network
 
@@ -37,6 +52,12 @@
   <https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/activity-log?tabs=powershell>
 
 
+## Azure Subscriptions
+
+* Service Level Agreement (SLA) \
+  TODO
+
+
 ## Azure Machine Learning
 
 * Azure Machine Learning Studio = Tool to create ML-models and analyze results \
@@ -48,7 +69,32 @@
   <https://learn.microsoft.com/en-us/azure/cognitive-services/what-are-cognitive-services>
   
 
-## Other
+## Other / TODOs
 
 * Azure Arc = Service to connect Azure, other Cloud Provider or on-premise environments \
   <https://learn.microsoft.com/en-us/azure/azure-arc/overview>
+
+
+### Evolution
+
+* On-Premise: Buy your own hardware
+  * Highest start costs
+* Dedicated: Rent a machine
+  * High start costs
+  * Limited to OS
+* VMs: Rent a VM on a machine
+  * Hypervisor
+* Container: 
+  * Docker
+* Functions:
+  * Server-less compute
+
+
+### Availability zones
+
+* Zonal services: Specific zone
+* Zone redundant services: replicates automatically accoss zones
+* Non-regional services: ??
+
+* Region: Min 400 miles away
+  * Availability zones: Have their own infrastructure
