@@ -70,6 +70,8 @@
 * Public endpoints: Public IP which can be accessed from anywhere
 * Private endpoints: Can be accessed only within the virtual network
 
+* All resources have by default internet access
+
 
 ### Isolation and segmentation
 
