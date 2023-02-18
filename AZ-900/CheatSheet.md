@@ -39,6 +39,8 @@
 * Network security groups = Package firewall (`Deny all` at the end) \
   <https://learn.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview>
 
+* Azure Policy = Allow all, deny all ????
+
 * Azure Policy initiatives = Grouping for policy definitions \
   <https://learn.microsoft.com/en-us/azure/governance/policy/concepts/initiative-definition-structure>
 

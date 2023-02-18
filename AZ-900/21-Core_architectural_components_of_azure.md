@@ -17,12 +17,16 @@ Explore the Azure infrastructure in [Global infrastructure map](https://infrastr
 * Datacenters: Dedicated power, cooling and network infrastructure
   * Not directly accessible
 
-* Azure Availability Zone (AZ): Physically separate datacenters
+* Azure Availability Zone (AZ)
+  * Physically separate datacenters
+  * One or more datacenters
+  * Within a region
   * Isolated from other AZs (own power, cooling and network)
   * IMPORTANT: **To ensure resiliency, a minimum of three separate availability zones are present in all availability zone-enabled regions. However, not all Azure Regions currently support availability zones.**
 
-* Regions: Consists of one or more AZs
-
+* Regions
+  * Not all regions support AZs
+  * Contains at least one datacenter  
 
 * Region pairs
   * IMPORTANT: **Not all Azure services automatically replicate data or automatically fall back from a failed region to cross-replicate to another enabled region. In these scenarios, recovery and replication must be configured by the customer.**
