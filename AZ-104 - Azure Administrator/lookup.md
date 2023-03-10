@@ -11,3 +11,9 @@
   * Account Administrator
   * Service Administrator
   * Co-Administrator
+
+
+* Azure AD ... Custom Roles are only available from Premium
+
+
+

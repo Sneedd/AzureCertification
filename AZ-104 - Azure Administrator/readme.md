@@ -6,7 +6,7 @@
 
 
 ## 1. Prerequisites for Azure administrators
-* [1.1. Configure Azure resources with tools](./Chapters/11-Configure Azure resources with tools.md)
+* [1.1. Configure Azure resources with tools](./Chapters/11-Configure_Azure_resources_with_tools.md)
 * [1.2. Use Azure Resource Manager]()
 * [1.3. Configure resources with Azure Resource Manager templates]()
 * [1.4. Automate Azure tasks using scripts with PowerShell]()
@@ -18,9 +18,9 @@
 * [Microsoft Learn - AZ-104: Prerequisites for Azure administrators](https://learn.microsoft.com/en-us/training/paths/az-104-administrator-prerequisites/)
 
 
-## 2. Manage identities and governance in Azure (288 min)
-* [2.1. Configure Azure Active Directory]()
-* [2.2. Configure user and group accounts]()
+## 2. Manage identities and governance in Azure
+* [2.1. Configure Azure Active Directory](./Chapers/21-Configure_Azure_Active_Directory.md)
+* [2.2. Configure user and group accounts](./Chapers/22-Configure_user_and_group_accounts.md)
 * [2.3. Configure subscriptions]()
 * [2.4. Configure Azure Policy]()
 * [2.5. Configure role-based access control]()
