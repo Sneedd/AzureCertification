@@ -7,8 +7,8 @@
 
 ## 1. Prerequisites for Azure administrators
 * [1.1. Configure Azure resources with tools](./Chapters/11-Configure_Azure_resources_with_tools.md)
-* [1.2. Use Azure Resource Manager]()
-* [1.3. Configure resources with Azure Resource Manager templates]()
+* [1.2. Use Azure Resource Manager](./Chapters/12-Use_Azure_Resource_Manager.md)
+* [1.3. Configure resources with Azure Resource Manager templates](./Chapters/13-Configure_resources_with_Azure_Resource_Manager_templates.md)
 * [1.4. Automate Azure tasks using scripts with PowerShell]()
 * [1.5. Control Azure services with the CLI]()
 * [1.6. Deploy Azure infrastructure by using JSON ARM templates]()
@@ -35,7 +35,7 @@
 
 ## 3. Implement and manage storage in Azure
 
-* [3.1. Configure storage accounts]()
+* [3.1. Configure storage accounts](./Chapters/31-Configure_storage_accounts.md)
 * [3.2. Configure Azure Blob Storage]()
 * [3.3. Configure Azure Storage security]()
 * [3.4. Configure Azure Files and Azure File Sync]()
